@@ -8,26 +8,27 @@ import vn.iotstar.entity.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-22T17:15:41+0700",
+    date = "2026-09-23T18:28:53+0700",
     comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.46.0.v20260528-0407, environment: Java 25.0.3 (Eclipse Adoptium)"
 )
 @Component
 public class UserMapperImpl implements UserMapper {
 
     @Override
-    public UserDTO toDTO(User entity) {
+    public UserDTO toDto(User entity) {
         if ( entity == null ) {
             return null;
         }
 
         UserDTO userDTO = new UserDTO();
 
+        userDTO.setRoleId( entityRoleId( entity ) );
         userDTO.setRoleName( entityRoleName( entity ) );
-        userDTO.setId( entity.getId() );
-        userDTO.setUsername( entity.getUsername() );
+        userDTO.setCreatedAt( entity.getCreatedAt() );
         userDTO.setEmail( entity.getEmail() );
-        userDTO.setFullName( entity.getFullName() );
         userDTO.setEnabled( entity.isEnabled() );
+        userDTO.setFullName( entity.getFullName() );
+        userDTO.setId( entity.getId() );
 
         return userDTO;
     }
@@ -38,15 +39,23 @@ public class UserMapperImpl implements UserMapper {
             return null;
         }
 
-        User.Builder user = User.builder();
+        User user = new User();
 
-        user.id( dto.getId() );
-        user.username( dto.getUsername() );
-        user.email( dto.getEmail() );
-        user.fullName( dto.getFullName() );
-        user.enabled( dto.isEnabled() );
+        user.setCreatedAt( dto.getCreatedAt() );
+        user.setEmail( dto.getEmail() );
+        user.setEnabled( dto.isEnabled() );
+        user.setFullName( dto.getFullName() );
+        user.setId( dto.getId() );
 
-        return user.build();
+        return user;
+    }
+
+    private Long entityRoleId(User user) {
+        Role role = user.getRole();
+        if ( role == null ) {
+            return null;
+        }
+        return role.getId();
     }
 
     private String entityRoleName(User user) {

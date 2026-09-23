@@ -8,7 +8,7 @@ import vn.iotstar.entity.User;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-09-22T14:23:06+0700",
+    date = "2026-09-22T17:15:40+0700",
     comments = "version: 1.6.3, compiler: Eclipse JDT (IDE) 3.46.0.v20260528-0407, environment: Java 25.0.3 (Eclipse Adoptium)"
 )
 @Component
